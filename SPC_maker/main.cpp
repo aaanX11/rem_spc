@@ -115,51 +115,30 @@ struct norma{
 		n2 = x2;
 		n3 = x3;
 		if(n1 == 0 && n2 == 0){
-			if(n3 == 1){
-				n = 3;
-			}
+			if(n3 == 1){				n = 3;			}
 			else{
-				if(n3 == -1){
-					n = -3;
-				}
-				else{
-					showerror("Norm index out of range\n");
-				}
+				if(n3 == -1){			n = -3;			}
+				else{					showerror("Norm index out of range\n");				}
 			}
 		}
 		if(n1 == 0 && n3 == 0){
-			if(n2 == 1){
-				n = 2;
-			}
-			else{
-				if(n2 == -1){
-					n = -2;
-				}
-				else{
-					showerror("Norm index out of range\n");
-				}
+			if(n2 == 1){				n = 2;			}
+			else{				
+				if(n2 == -1){			n = -2;				}
+				else{					showerror("Norm index out of range\n");				}
 			}
 		}
 		if(n2 == 0 && n3 == 0){
-			if(n1 == 1){
-				n = 1;
-			}
+			if(n1 == 1){				n = 1;			}
 			else{
-				if(n1 == -1){
-					n = -1;
-				}
-				else{
-					showerror("Norm index out of range\n");
-				}
+				if(n1 == -1){			n = -1;				}
+				else{					showerror("Norm index out of range\n");				}
 			}
 		}
-		if((n1 != 0 && n2 != 0) || (n1 != 0 && n3 != 0) || (n2 != 0 && n3 != 0)){
-			showerror("Norm index out of range\n");
-		}
+		if((n1 != 0 && n2 != 0) || (n1 != 0 && n3 != 0) || (n2 != 0 && n3 != 0)){			showerror("Norm index out of range\n");		}
 	}
 	norma(string s){
 		stringstream ss(s);
-
 		ss>>n;
 		ss>>n1>>n2>>n3;
 	}
@@ -190,102 +169,41 @@ struct coord{
 	}
 };
 
-
-void toUpper(string& buf){
-	//buf.assign(buf.ToUpper());
-	return;
-	/*
-	int i, n;
-	char buf1[32];
-	int i = 0;
-	while(buf[i] != '\0'){
-		if(buf[i] <= 'z' && buf[i] >= 'a'){
-			buf1[i] = buf[i] - 'a' + 'A';
-		}
-		else{
-			buf1[i] = buf[i];
-		}
-		i++;
-	}
-	buf1[i] = '\0';
-	return buf1;
-	*/
-}
-
-
 bool isinvertion(int norm_prev, int norm){
-	bool res;
-	res = false;
 	if(norm != norm_prev){
-		if((norm == -1 && norm_prev == 1) || ((abs(norm) == 1)&& (1 < abs(norm_prev)))){
-			res = true;
-		}
-		if((norm == -2 && norm_prev == 2) || (abs(norm) == 2 && abs(norm_prev) == 3)){
-			res = true;
-		}
-		if(norm = -3 && norm_prev == 3){
-			res = true;
-		}
+		if((norm == -1 && norm_prev == 1) || ((abs(norm) == 1)&& (1 < abs(norm_prev)))){		return true;		}
+		if((norm == -2 && norm_prev == 2) || (abs(norm) == 2 && abs(norm_prev) == 3)){			return true;		}
+		if(norm = -3 && norm_prev == 3){			return true;		}
 	}
-	return res;
+	return false;
 }
 
 int createnorm(int n1, int n2, int n3){
 	if(n1 == 0 && n2 == 0){
-		if(n3 == 1){
-			return 3;
-		}
+		if(n3 == 1){			return 3;		}
 		else{
-			if(n3 == - 1){
-				return -3;
-			}
-		}
+			if(n3 == - 1){		return -3;			}		}
 	}
 	if(n1 == 0 && n3 == 0){
-		if(n2 == 1){
-			return 2;
-		}
+		if(n2 == 1){			return 2;		}
 		else{
-			if(n2 == - 1){
-				return -2;
-			}
-		}
+			if(n2 == - 1){		return -2;			}		}
 	}
-	if(n2 == 0 && n3 == 0){
-		if(n1 == 1){
-			return 1;
-		}
+	if(n2 == 0 && n3 == 0){		
+		if(n1 == 1){			return 1;		}
 		else{
-			if(n1 == - 1){
-				return -1;
-			}
-		}
+			if(n1 == - 1){				return -1;			}		}
 	}
 	return 4;
 }
 bool ischanged(int norm_prev, int norm){
-	if(norm == norm_prev){
-		return false;
-	}
-	else{
-		return true;
-	}
+	if(norm == norm_prev){		return false;	}
+	else{		return true;	}
 }
 
+void fillarray(int* a, int n){	for(int i = 0; i < n; i++){		a[i] = -1;	}}
+void fillarray(double* a, int n){	for(int i = 0; i < n; i++){		a[i] = 0.0;	}}
 
-
-
-
-void fillarray(int* a, int n){
-	for(int i = 0; i < n; i++){
-		a[i] = -1;
-	}
-}
-void fillarray(double* a, int n){
-	for(int i = 0; i < n; i++){
-		a[i] = 0.0;
-	}
-}
 coord getsizefromgrid(string gridfname){
 	int x, y, z;
 	ifstream grid(gridfname.c_str());
@@ -337,9 +255,7 @@ vector <int> readbadlayers(string optionfname){
 	if(opt){
 		while(fgets(buf, 256, opt) != NULL){
 			sscanf(buf, "%d", &layer);		
-			if(find(badlayers.begin(), badlayers.end(), layer) == badlayers.end()){
-				badlayers.push_back(layer);
-			}
+			if(find(badlayers.begin(), badlayers.end(), layer) == badlayers.end()){				badlayers.push_back(layer);			}
 		}
 		fclose(opt);
 	}
@@ -456,15 +372,11 @@ void EC::setgrid(const string& s1, const string& s2){
 			break;
 	}
 	ss1.str(s1);
-	for (int j = 1; j < n1; j++){
-		ss1>>axis1[j];
-	}	
+	for (int j = 1; j < n1; j++){		ss1>>axis1[j];	}	
 	axis1[0] = axis1[1] - (axis1[2] - axis1[1]);
 	axis1[n1] = axis1[n1 - 1] + (axis1[n1 - 1] - axis1[n1 - 2]);
 	ss2.str(s2);
-	for (int j = 1; j < n2; j++){
-		ss2>>axis2[j];
-	}
+	for (int j = 1; j < n2; j++){		ss2>>axis2[j];	}
 	axis2[0] = axis2[1] - (axis2[2] - axis2[1]);
 	axis2[n2] = axis2[n2 - 1] + (axis2[n2 - 1] - axis2[n2 - 2]);
 	return;	
@@ -514,9 +426,7 @@ void EC::isnearborders(int x, int y, int z, int& side, int& corner) const{
 	switch(coaxis){
 		case 'X':
 			if(y == 1){
-				if(z == 1){
-					corner = 0;
-				}
+				if(z == 1){					corner = 0;				}
 				else{
 					if(z == size.z - 1){corner = 3;}
 					else{side = 0;}
@@ -524,9 +434,7 @@ void EC::isnearborders(int x, int y, int z, int& side, int& corner) const{
 			}
 			else{
 				if(y == size.y - 1){
-					if(z == 1){
-						corner = 1;
-					}
+					if(z == 1){						corner = 1;					}
 					else{
 						if(z == size.z - 1){corner = 2;}
 						else{side = 2;}
@@ -542,9 +450,7 @@ void EC::isnearborders(int x, int y, int z, int& side, int& corner) const{
 			break;
 		case 'Y':
 			if(x == 1){
-				if(z == 1){
-					corner = 0;
-				}
+				if(z == 1){					corner = 0;				}
 				else{
 					if(z == size.z - 1){corner = 3;}
 					else{side = 0;}
@@ -552,9 +458,7 @@ void EC::isnearborders(int x, int y, int z, int& side, int& corner) const{
 			}
 			else{
 				if(x == size.x - 1){
-					if(z == 1){
-						corner = 1;
-					}
+					if(z == 1){						corner = 1;					}
 					else{
 						if(z == size.z - 1){corner = 2;}
 						else{side = 2;}
@@ -570,9 +474,7 @@ void EC::isnearborders(int x, int y, int z, int& side, int& corner) const{
 			break;
 		case 'Z':
 			if(x == 1){
-				if(y == 1){
-					corner = 0;
-				}
+				if(y == 1){					corner = 0;				}
 				else{
 					if(y == size.y - 1){corner = 3;}
 					else{side = 0;}
@@ -580,9 +482,7 @@ void EC::isnearborders(int x, int y, int z, int& side, int& corner) const{
 			}
 			else{
 				if(x == size.x - 1){
-					if(y == 1){
-						corner = 1;
-					}
+					if(y == 1){						corner = 1;					}
 					else{
 						if(y == size.y - 1){corner = 2;}
 						else{side = 2;}
@@ -730,14 +630,10 @@ void EC::show() const{
 	}
 	
 	printf("grid: axis1\n");
-	for(int i = 0; i <= n1; i++ ){
-		printf("%lf\t", axis1[i]);
-	}
+	for(int i = 0; i <= n1; i++ ){		printf("%lf\t", axis1[i]);	}
 	printf("\n");
 	printf("grid: axis2\n");
-	for(int i = 0; i <= n2; i++ ){
-		printf("%lf\t", axis2[i]);
-	}
+	for(int i = 0; i <= n2; i++ ){		printf("%lf\t", axis2[i]);	}
 	printf("\n");
 	return;
 }
@@ -757,16 +653,10 @@ public:
 	space(const space& s);
 	void findbadlaysnear(int x, int y, int z, int alongaxis, int* badlaysdisposition) const;
 	bool filled(){
-		if (pointer == (size.x - 2)*(size.y - 2)*(size.z - 2)){
-			return true;
-		}
-		else{
-			return false;
-		}
+		if (pointer == (size.x - 2)*(size.y - 2)*(size.z - 2)){			return true;		}
+		else{			return false;		}
 	}
-	int layerat(int x, int y, int z){
-		return layers[pointer3d.z + pointer3d.y*size.z + pointer3d.x*size.z*size.y];
-	}
+	int layerat(int x, int y, int z){		return layers[pointer3d.z + pointer3d.y*size.z + pointer3d.x*size.z*size.y];	}
 	void fillsomecells(int cellnumber);
 	void skipsomecells(int cellnumber);
 	void show() const;
@@ -779,9 +669,7 @@ space::space(const space& s){
 	int nny, nnx;
 	nny  = size.z;
 	nnx = size.z*size.y;
-	for(int i = 0; i < size.x*size.y*size.z; i++){
-		layers[i] = s.layers[i];
-	}
+	for(int i = 0; i < size.x*size.y*size.z; i++){		layers[i] = s.layers[i];	}
 	pointer = 0;
 	pointer3d.set(0);
 	containsbadlayers = s.containsbadlayers;
@@ -805,8 +693,7 @@ void space::findbadlaysnear(int x, int y, int z, int alongaxis, int* badlaysdisp
 	nnx = size.z*size.y;
 	switch(alongaxis){
 		case 'X':
-			if(layers[(z - 1)+	(y - 1)*nny + (x)*nnx] == -2){
-				badlaysdisposition[3] = 1;}
+			if(layers[(z - 1)+	(y - 1)*nny + (x)*nnx] == -2){				badlaysdisposition[3] = 1;}
 			if(layers[(z - 1) + (y)*nny +		(x)*nnx] == -2){badlaysdisposition[2] = 1;}
 			if(layers[z +		(y - 1)*nny + (x)*nnx] == -2){badlaysdisposition[1] = 1;}
 			if(layers[z +		(y)*nny +		(x)*nnx] == -2){badlaysdisposition[0] = 1;}
@@ -815,15 +702,13 @@ void space::findbadlaysnear(int x, int y, int z, int alongaxis, int* badlaysdisp
 			if(layers[z - 1 + (y)*nny + (x - 1)*nnx] == -2){badlaysdisposition[3] = 1;}
 			if(layers[(z - 1) + (y)*nny + (x)*nnx] == -2){badlaysdisposition[2] = 1;}
 			if(layers[(z) + (y)*nny + (x - 1)*nnx] == -2){badlaysdisposition[1] = 1;}
-			if(layers[(z) + (y)*nny + (x)*nnx] == -2){badlaysdisposition[0] = 1;}
-			
+			if(layers[(z) + (y)*nny + (x)*nnx] == -2){badlaysdisposition[0] = 1;}			
 			break;
 		case 'Z':
 			if(layers[(z) +	(y - 1)*nny + (x - 1)*nnx] == -2){badlaysdisposition[3] = 1;}
 			if(layers[(z) + (y - 1)*nny + (x)*nnx]		== -2){badlaysdisposition[2]= 1;}
 			if(layers[(z) +	(y)*nny +		(x - 1)*nnx] == -2){badlaysdisposition[1] = 1;}
-			if(layers[(z) + (y)*nny +		(x)*nnx]		== -2){badlaysdisposition[0] = 1;}
-			
+			if(layers[(z) + (y)*nny +		(x)*nnx]		== -2){badlaysdisposition[0] = 1;}			
 			break;
 	}
 	return;
@@ -836,9 +721,7 @@ void space::show() const{
 		printf("layers in space\n");
 		for(ix = 0; ix < size.x; ix++){
 			for(iy = 0; iy < size.y; iy++){
-				for(iz = 0; iz < size.z; iz++){
-					printf("%d\t", layers[iz + iy*nny + ix*nnx]);
-				}
+				for(iz = 0; iz < size.z; iz++){					printf("%d\t", layers[iz + iy*nny + ix*nnx]);				}
 				printf("\n");
 			}
 			printf("\n");
@@ -922,9 +805,7 @@ void space::fillspace(const string& optlaysfname, const string& cellfname){
 				stringstream ss2;
 				ss2.str(s);
 				ss2>>lpoints;
-				if(find(badlayers.begin(), badlayers.end(), layer) == badlayers.end()){	
-					skipsomecells(lpoints);
-				}
+				if(find(badlayers.begin(), badlayers.end(), layer) == badlayers.end()){	skipsomecells(lpoints);				}
 				else{
 					if(!containsbadlayers){containsbadlayers = true;}
 					fillsomecells(lpoints);					
@@ -933,13 +814,9 @@ void space::fillspace(const string& optlaysfname, const string& cellfname){
 				ss2.clear();
 			}
 			cell.clear();
-			if(!filled()){
-				showerrorf(cellfname);
-			}
+			if(!filled()){				showerrorf(cellfname);			}
 		}
-		else{
-			showerrorf(cellfname);
-		}
+		else{			showerrorf(cellfname);		}
 	}
 	return;
 }
@@ -947,14 +824,11 @@ void space::fillspace(const string& optlaysfname, const string& cellfname){
 
 void fillallECs(EC& ecx, EC& ecy, EC& ecz, const string& particlefname, const string& normalfname, int particle){
 	if(particle == 3){return;}
-	double val;
-	
+	double val;	
 	string s1, s2, s3;
 	coord sizex, sizey, sizez;
-
 	double iplus;
 	int n, ix,  iy, iz, xnny, xnnx, ynny, ynnx, znny, znnx;
-
 	sizex.set(ecx.getsize());
 	sizey.set(ecy.getsize());
 	sizez.set(ecz.getsize());
@@ -964,11 +838,8 @@ void fillallECs(EC& ecx, EC& ecy, EC& ecz, const string& particlefname, const st
 	ynnx = sizey.y*sizey.z;
 	znny = sizez.z;
 	znnx = sizez.y*sizez.z;
-
 	ifstream par(particlefname.c_str());
-
-	ifstream norm(normalfname.c_str());
-	
+	ifstream norm(normalfname.c_str());	
 	if(par && norm){
 		while(getline(par, s1) && getline(norm, s3)) {
 			stringstream ss1;
@@ -983,30 +854,18 @@ void fillallECs(EC& ecx, EC& ecy, EC& ecz, const string& particlefname, const st
 			switch(abs(n)){
 				case 1:
 					val = (iplus);
-					try{
-						ecx.setEC(ix, iy, iz, n, val);
-					}
-					catch(const invalid_argument& e){
-						throw(e);
-					}
+					try{						ecx.setEC(ix, iy, iz, n, val);					}
+					catch(const invalid_argument& e){						throw(e);					}
 					break;
 				case 2:
 					val = (iplus);
-					try{
-						ecy.setEC(ix, iy, iz, n, val);
-					}
-					catch(const invalid_argument& e){
-						throw(e);
-					}
+					try{						ecy.setEC(ix, iy, iz, n, val);					}
+					catch(const invalid_argument& e){						throw(e);					}
 					break;
 				case 3:
 					val = (iplus);
-					try{
-						ecz.setEC(ix, iy, iz, n, val);
-					}
-					catch(const invalid_argument& e){
-						throw(e);
-					}
+					try{						ecz.setEC(ix, iy, iz, n, val);					}
+					catch(const invalid_argument& e){						throw(e);					}
 					break;
 			}
 			ss1.clear();
@@ -1033,49 +892,31 @@ void fillECgrid(EC& ec, const string& gridfname){
 				i = 0;
 				while(getline(grid, s) && i < 13){
 					i++;
-					if(i == 10 ){
-						s1.assign(s);
-					}
-					if(i == 13){
-						s2.assign(s);
-					}
+					if(i == 10 ){						s1.assign(s);					}
+					if(i == 13){						s2.assign(s);					}
 				}
 				break;
 			case 'Y':
 				i = 0;
 				while(getline(grid, s) && i < 13){
 					i++;
-					if(i == 7){
-						//s1.resi
-						s1.assign(s);
-					}
-					if(i == 13){
-						s2.assign(s);
-					}
+					if(i == 7){						s1.assign(s);					}
+					if(i == 13){					s2.assign(s);					}
 				}
 				break;
 			case 'Z':
 				i = 0;
 				while(getline(grid, s) && i < 10){
 					i++;
-					if(i == 7){
-						s1.assign(s);					
-					}
-					if(i == 10 ){
-						s2.assign(s);					
-					}
+					if(i == 7){						s1.assign(s);								}
+					if(i == 10 ){					s2.assign(s);								}
 				}
 				break;
-
-		}
-		
+		}		
 		ec.setgrid(s1,s2);	
 	}
-	else{
-		showerrorf(gridfname);
-		return;
-	}
-	grid.clear();
+	else{		showerrorf(gridfname);		return;	}
+	grid.close();
 	return;
 }
 
@@ -1164,20 +1005,12 @@ void findname(string& s){
 	tmp1 = s.find_first_of(' ');
 	tmp2 = s.find_first_of('\t');
 	if(tmp1 > 0 && tmp2 > 0){
-		if(tmp1 < tmp2){
-			s.assign(s.substr(0, tmp1));
-		}
-		else{
-			s.assign(s.substr(0, tmp2));
-		}
+		if(tmp1 < tmp2){			s.assign(s.substr(0, tmp1));		}
+		else{			s.assign(s.substr(0, tmp2));		}
 	}
 	else{
-		if(tmp2 > 0){
-			s.assign(s.substr(0, tmp2));
-		}
-		if(tmp1 > 0){
-			s.assign(s.substr(0, tmp1));
-		}
+		if(tmp2 > 0){			s.assign(s.substr(0, tmp2));		}
+		if(tmp1 > 0){			s.assign(s.substr(0, tmp1));		}
 	}
 	return;
 }
@@ -1190,8 +1023,8 @@ void findfilenames(string &gridfname, string &cellfname, vector<string>& detecto
 		i = 0;
 		while(getline(perenos, s) != NULL){
 			i++;
-			if(i == 5){
-				s.erase( remove(s.begin(), s.end(), '\r'), s.end() );
+			if(i == 5){				
+				s.erase( remove(s.begin(), s.end(), '\r'), s.end() );				
 				gridfname.assign(s);
 			}
 			if(i == 6){
@@ -1272,10 +1105,8 @@ void findfilenames(string &gridfname, string &cellfname, vector<string>& detecto
 }
 
 void findfilenames(vector<string>& detectorsnames, vector<string>& normalsfnames, vector<string>& templatesfnames, vector<string>& resfnames, vector<int>& particlenames){
-	int i;
-	
+	int i;	
 	string s, templatefname, normalfname;
-
 	ifstream detectors("detectors");
 	if(detectors){
 		i = 0;
@@ -1368,10 +1199,7 @@ void readgrid(double* coord, const string& gridfname,const int& size,const strin
 	getline(grid, s);
 	getline(grid, s);
 	ss.str(s);
-	for(int i = 0; i < size + 1; i++){
-		ss>>tmp;
-		coord[i] = tmp;
-	}	
+	for(int i = 0; i < size + 1; i++){		ss>>tmp;		coord[i] = tmp;	}	
 	ss.clear();
 	return;
 }
@@ -1410,25 +1238,12 @@ void convert(const string& oldnormfname, const string& gridfname, const string& 
 		stringstream ss(s);
 		ss>>n>>celx>>cely>>celz;
 		norma nor(n);
-		if(n == 1 || n == -1){
-			xx = x[celx - 1];
-		}
-		else{
-			xx = 0.5*(x[celx - 1] + x[celx]);
-		}
-		if(n == 2 || n == -2){
-			yy = y[cely - 1];
-		}
-		else{
-			yy = 0.5*(y[cely - 1] + y[cely]);
-		}
-		if(n == 3 || n == -3){
-			zz = z[celz - 1];
-		}
-		else{
-			zz = 0.5*(z[celz - 1] + z[celz]);
-		}
-		
+		if(n == 1 || n == -1){			xx = x[celx - 1];		}
+		else{			xx = 0.5*(x[celx - 1] + x[celx]);		}
+		if(n == 2 || n == -2){			yy = y[cely - 1];		}
+		else{			yy = 0.5*(y[cely - 1] + y[cely]);		}
+		if(n == 3 || n == -3){			zz = z[celz - 1];		}
+		else{			zz = 0.5*(z[celz - 1] + z[celz]);		}		
 		fprintf(norm, "%e\t", xx);
 		fprintf(norm, "%e\t", yy);
 		fprintf(norm, "%e\t", zz);
@@ -1525,11 +1340,8 @@ int readdetect(const string& normfname, vector<int>& normchanges, bool old, int*
 		ss1>>n1>>n2>>n3;
 		norma nor(n1, n2, n3);
 		ncur = nor.n;		
-		if(nprev != ncur){
-			
-			if(i > 0){
-				fsizes[numberofnormal(nprev)] += i - normchanges[k - 1];
-			}	
+		if(nprev != ncur){			
+			if(i > 0){				fsizes[numberofnormal(nprev)] += i - normchanges[k - 1];			}	
 			normchanges.push_back(i);
 			k++;
 		}		
@@ -1544,39 +1356,28 @@ int readdetect(const string& normfname, vector<int>& normchanges, bool old, int*
 
 void askuser(const string& name, const int& detectnumber, bool& split){
 	char answer1;
-
 	cout<<"detector "<<name<<" has "<<detectnumber<<" detectors";
 	cout<<'\n';
 	cout<<"split output file?(y/n)\n";
 	cin>>answer1;
 	
-	if(answer1 == 'y'){
-		split = true;
-	}
+	if(answer1 == 'y'){		split = true;	}
 	else{		
-		if(answer1 != 'n'){
-			cout<<"no split";
-		}
+		if(answer1 != 'n'){			cout<<"no split";		}
 		split = false;
 	}
 	
 }
 void askuser(bool& calcEC){
 	char answer1;
-
 	cout<<"Calculate currents? (y/n)\n";
 	cin>>answer1;
 	
-	if(answer1 == 'y'){
-		calcEC = true;
-	}
+	if(answer1 == 'y'){		calcEC = true;	}
 	else{		
-		if(answer1 != 'n'){
-			cout<<"not calculating";
-		}
+		if(answer1 != 'n'){			cout<<"not calculating";		}
 		calcEC = false;
-	}
-	
+	}	
 }
 
 class detector{
@@ -1584,25 +1385,18 @@ class detector{
 	int familynumber;
 	int detectnumber;
 	int particle;
-
 	int fsizes[6];
-
 	vector <int> normchanges;
-
 	string name;
 	string resname;
 	string norms;
-
-	int energyintervalsnum;
-	
+	int energyintervalsnum;	
 public:
-	bool exists;
-	
+	bool exists;	
 	detector(int i, string detect, string norm, string templ, string res, int particle);
 	detector(int i, string detect, string norm, string templ, string res, int particle, bool type);
 	int getnumnormals();
 	void calculateandwrite(ofstream& common);
-
 };
 
 detector::detector(int i, string detect, string norm, string templ, string res, int par){
@@ -1621,7 +1415,6 @@ detector::detector(int i, string detect, string norm, string templ, string res, 
 		catch(const invalid_argument& e){
 			throw e;
 		}
-		//askuser(name, detectnumber, split);
 	}
 }
 detector::detector(int i, string detect, string norm, string templ, string res, int par, bool type){
@@ -1633,13 +1426,9 @@ detector::detector(int i, string detect, string norm, string templ, string res, 
 		name.assign(detect);
 		resname.assign(res);
 		norms.assign(norm);
-		for(int q = 0; q < 6; q++){
-			fsizes[q] = 0;
-		}
+		for(int q = 0; q < 6; q++){			fsizes[q] = 0;		}
 		try{detectnumber = readdetect(norm, normchanges, old, fsizes);}
-		catch(const invalid_argument& e){
-			throw e;
-		}
+		catch(const invalid_argument& e){			throw e;		}
 	}
 }
 
@@ -1745,16 +1534,10 @@ bool hastwoindex(const string& name){
 	s1.assign(name.substr(size - 1, 1));
 	s2.assign(name.substr(size - 3, 1));
 	if(digital(s1)){
-		if(digital(s2)){
-			return true;
-		}
-		else{
-			return false;
-		}
+		if(digital(s2)){			return true;		}
+		else{			return false;		}
 	}
-	else{
-		return false; //and throw exeption
-	}
+	else{		return false; 	}
 }
 void createname(string& outputfname1, const string& name){
 	outputfname1.assign(name);
@@ -1785,27 +1568,20 @@ void detector::calculateandwrite(ofstream& log){
 	int nnor, j, i, k, n1, n2, n3;
 	string s, s1, s2;
 	string outputfname1, outputfname;
-
 	bool firsttimemeetnorm[6];
-	for(int q = 0; q < 6; q++){
-		firsttimemeetnorm[q] = true;
-	}
-	
+	for(int q = 0; q < 6; q++){		firsttimemeetnorm[q] = true;	}
 	ifstream res(resname.c_str());
 	ifstream norm(norms.c_str());
 	ofstream dest;
-	dest.open("nevermind");
-	
+	dest.open("nevermind");	
 	j = 0;
 	i = 0;
 	k = 0;
-
 	for(int a = 0; a < 6; a++){
 		createname(outputfname, name, a);
 		remove(outputfname.c_str());
 		outputfname.assign("");
 	}
-
 	log<<name<<'\n';
 	int normchangesrange = normchanges.size();
 	while(getline(norm, s1) != NULL){		
@@ -1816,8 +1592,7 @@ void detector::calculateandwrite(ofstream& log){
 		nnor = nor.normindex();
 		if(k < normchangesrange && j == normchanges[k]){			
 			dest.clear();
-			dest.close();
-			
+			dest.close();			
 			createname(outputfname, name, nnor);
 			dest.open(outputfname.c_str(), fstream::app|fstream::out);
 			
@@ -1869,23 +1644,14 @@ void findschemetype(bool& old){
 	ifstream perenos("perenos");
 	if(perenos){
 		i = 0;
-		while(getline(perenos, s) != NULL && i < 3){
-			i++;
-		}
-		
+		while(getline(perenos, s) != NULL && i < 3){			i++;	}		
 		stringstream ss(s);
 		int tmp;
 		ss>>tmp;
-		if(tmp == 0){
-			old = true;
-		}
-		else{
-			old = false;
-		}
+		if(tmp == 0){			old = true;		}
+		else{			old = false;		}
 	}
-	else{
-		showerror("perenos");
-	}
+	else{		showerror("perenos");	}
 	return;
 }
 void newscheme(){
