@@ -1,0 +1,9 @@
+data/
+SPC_maker_archive/
+example/
+example_SPC_maker.7z
+*.manifest
+*.htm
+*.docx
+makefile
+*.7z
